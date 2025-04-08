@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    include: secret
+    active: dev
+    # 개발할땐 application-dev.yml 참고
+    #  배포할땐 application-dev.yml 참고한다는뜻
+
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database: mysql
+    hibernate:
+      ddl-auto: none
+
+    # JDBC TimeZone Setting
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: Asia/Seoul
+        format_sql: true
+        use_sql_comments: true
