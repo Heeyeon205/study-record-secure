@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}" >
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div th:replace="~{fragments/bodyHeader :: bodyHeader}"></div>
+
+<section>
+    <form th:action="@{/study/update}" method="POST">
+        <table>
+            <tr>
+                <td><label>회원</label></td>
+                <td><span class="input-data" th:text="${record.memberName}"> </span></td>
+            </tr>
+            <tr>
+                <td><label for="studyDay">Study Day</label></td>
+                <td><input type="date" id="studyDay" name="studyDay" th:value="${record.studyDay}" th:max="${curdate}"></td>
+            </tr>
+            <tr>
+                <td><label for="startTime">Start Time</label></td>
+                <td><input type="time" id="startTime" name="startTime" th:value="${record.startTime}" required></td>
+            </tr>
+            <tr>
+                <td><label>공부 기록(분)</label></td>
+                <td><input type="number" name="studyMins" th:value="${record.studyMins}" min="1" max="600"></td>
+            </tr>
+            <tr>
+                <td><label>Contents</label></td>
+                <td><input type="text" name="contents" th:value="${record.contents}" size="70"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="center">
+                    <input type="hidden" name="studyId" th:value="${record.studyId}">
+                    <input type="hidden" name="memberId" th:value="${record.memberId}">
+                    <button class="btn btn-modify btn-big"> 수정</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</section>
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

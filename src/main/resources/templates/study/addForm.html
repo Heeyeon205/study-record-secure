@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}" >
+    <meta charset="UTF-8">
+</head>
+<body>
+
+
+<div th:replace="~{fragments/bodyHeader :: bodyHeader}"></div>
+
+
+<section>
+    <form action="/study" method="POST">
+        <table >
+            <thead>
+            <th colspan="2" class="center"> 공부 기록 추가  </th>
+            </thead>
+            <tr>
+                <td><label for="LoginId">회원</label></td>
+                <td>
+                    <select name="LoginId" id="LoginId" >
+                        <option value="">회원선택</option>
+                        <option th:each="member : ${members}"
+                                th:value="${member.LoginId}"
+                                th:text="${member.Name}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="studyDay">Study Day:</label></td>
+                <td>
+                    <input type="date" id="studyDay" name="studyDay" th:value="${curdate}" th:max="${curdate}">
+                </td>
+            </tr>
+            <tr>
+                <td><label for="startTime">Start Time:</label></td>
+                <td>
+                    <input type="time" id="startTime" name="startTime" th:value="${curtime}" required>
+                </td>
+            </tr>
+            <tr>
+                <td>공부기록(분):</td>
+                <td>
+                    <input type="number" name="studyMins" value="" min="1">
+                </td>
+            </tr>
+            <tr>
+                <td>Contents:</td>
+                <td>
+                    <input type="text" name="contents" value="" size="70">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="center">
+                    <button class="btn btn-submit btn-big" type="submit"> 기록 추가 </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</section>
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

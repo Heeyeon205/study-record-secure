@@ -18,28 +18,36 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Spring Boot Starter
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // JPA (Hibernate) 사용을 위한 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // Thymeleaf 템플릿 엔진 사용
+    implementation 'org.springframework.boot:spring-boot-starter-web' // Spring MVC + 내장 톰캣
 
-    // P6Spy 의존성 추가  --> jpa db 콘솔창에 ? 값넣어주는 라이브러리
-    implementation 'p6spy:p6spy:3.9.1'
-    implementation 'com.github.gavlyukovskiy:datasource-decorator-spring-boot-autoconfigure:1.9.0'
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security' // Spring Security 기본 기능
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // 소셜 로그인(OAuth2) 클라이언트 기능
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6' // Thymeleaf에서 Spring Security 연동 처리
 
-    // 시큐리티추가
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    testImplementation 'org.springframework.security:spring-security-test'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    // Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation' // @Valid, @NotBlank 등의 유효성 검사 기능 제공
 
-    //Oauth 유저 추가
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    // DB
+    runtimeOnly 'com.mysql:mysql-connector-j' // MySQL JDBC 드라이버
+    implementation 'p6spy:p6spy:3.9.1' // SQL 쿼리 로그 확인용 디버깅 라이브러리
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok' // 컴파일 시에만 필요한 Lombok
+    annotationProcessor 'org.projectlombok:lombok' // 어노테이션 프로세서 등록
+
+    // 개발 편의성
+    developmentOnly 'org.springframework.boot:spring-boot-devtools' // 자동 재시작, LiveReload 등 개발자 편의 기능 제공
+
+    // 테스트
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // JUnit + Spring Test 등 테스트 기본 구성
+    testImplementation 'org.springframework.security:spring-security-test' // Security 테스트용 도우미
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // JUnit 플랫폼 실행기
 }
+
 
 tasks.named('test') {
     useJUnitPlatform()

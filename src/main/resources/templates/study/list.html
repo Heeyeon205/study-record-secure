@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}" >
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div th:replace="~{fragments/bodyHeader :: bodyHeader}"></div>
+
+<section>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>시작날짜</th>
+            <th>시간(분)</th>
+            <th>끝난날짜</th>
+            <th>기록</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="study : ${list}">
+            <td th:text="${study.studyId}">3</td>
+            <td th:text="${study.memberName}">홍길동</td>
+            <td th:text="| ${study.studyDay} / ${study.startTime} | ">2025-04-03 / 10:00:00</td>
+            <td th:text="|${study.studyMins}분| ">30분</td>
+            <td th:text="${study.endStudyDay}"> 2025-04-03 / 10:30:00</td>
+            <td th:text="${study.contents}">내용</td>
+            <td><a th:href="@{/study/{id}(id=${study.studyId})}" class="link btn btn-modify">수정</a></td>
+            <td><button th:onclick="|deleteRecord(${study.studyId})|" class="btn btn-delete">삭제</button></td>
+        </tr>
+        </tbody>
+
+    </table>
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"> </div>
+</body>
+</html>
+<script defer src="/js/study.js"> </script>

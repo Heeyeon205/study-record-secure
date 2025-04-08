@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}" >
+    <meta charset="UTF-8">
+</head>
+<body>
+
+
+<div th:replace="~{fragments/bodyHeader :: bodyHeader}"></div>
+
+<section>
+    <div class="error" th:if="${not #strings.isEmpty(msg)}" ><strong th:text="${msg}"></strong> </div>
+    <form th:action="@{/member}" th:object="${addMemberRequest}" method="post">
+    <!--    <form action="/member" method="post"> -->
+        <table class="sm_table">
+            <thead>
+            <th colspan="2" class="center"> 회원 추가  </th>
+            </thead>
+            <tr>
+                <th><label for="id">ID </label></th>
+                <td>
+                    <input type="text" id="id" name="id" required placeholder="ID을 입력하세요"/>
+                    <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="error"></div>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="pw">PW</label></th>
+                <td>
+                    <input type="text" id="pw" name="pw" required placeholder="PW을 입력하세요"/>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="id">Email </label></th>
+                <td>
+                    <input type="text" id="email" name="email" required placeholder="Email을 입력하세요"/>
+
+                </td>
+            </tr>
+            <tr>
+                <th><label for="name">Name</label></th>
+                <td>
+                    <input type="text" id="name" name="name" required placeholder="name을 입력하세요"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="center">
+                    <button class="btn btn-submit btn-big" type="submit">등록</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</section>
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
