@@ -8,7 +8,7 @@ import java.time.LocalTime;
 
 @Getter
 public class StudyRecordResponse {
-    private final Long studyid;
+    private final Long studyId;
     private final Long memberId;
     private final String memberName;
     private final LocalDate studyDay;
@@ -17,7 +17,7 @@ public class StudyRecordResponse {
     private final String contents;
 
     public StudyRecordResponse(StudyRecordEntity study){
-        this.studyid = study.getId();
+        this.studyId = study.getId();
         this.memberId = study.getMember().getId();
         this.memberName = study.getMember().getName();
         this.studyDay = study.getStudyDay();

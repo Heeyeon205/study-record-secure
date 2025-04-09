@@ -44,12 +44,12 @@ public class MemberEntity {
     private String providerId; // 해당 제공자에서 발급한 유저 ID
 
     @Builder
-    public MemberEntity(String loginId, String password, String name, String email, String role,
-       String username, String provider, String providerId) {
+    public MemberEntity(String loginId, String password, String name, String email, Role role,
+                        String username, String provider, String providerId) {
 
-        if(loginId == null){
+        if (loginId == null) {
             this.loginId = username;
-        }else{
+        } else {
             this.loginId = loginId;
         }
 
@@ -57,19 +57,16 @@ public class MemberEntity {
         this.name = name;
         this.email = email;
 
-        this.role = Role.ROLE_STUDENT;
-        if(loginId != null && loginId.equals("admin")){
-            this.role = Role.ROLE_ADMIN;
-        }else{
-            this.role = Role.valueOf(role);
+        if (role == null) {
+            this.role = Role.ROLE_STUDENT;
+        } else {
+            this.role = loginId != null && loginId.equals("admin")
+                    ? Role.ROLE_ADMIN
+                    : role;
         }
 
-        if(provider != null){
-            this.provider = provider;
-        }
-        if(providerId != null){
-            this.providerId = providerId;
-        }
+        this.provider = provider;
+        this.providerId = providerId;
     }
 
     public enum Role {

@@ -18,11 +18,11 @@
             <tr>
                 <td><label for="LoginId">회원</label></td>
                 <td>
-                    <select name="LoginId" id="LoginId" >
+                    <select name="loginId" id="loginId" >
                         <option value="">회원선택</option>
                         <option th:each="member : ${members}"
-                                th:value="${member.LoginId}"
-                                th:text="${member.Name}"></option>
+                                th:value="${member.loginId}"
+                                th:text="${member.name}"></option>
                     </select>
                 </td>
             </tr>

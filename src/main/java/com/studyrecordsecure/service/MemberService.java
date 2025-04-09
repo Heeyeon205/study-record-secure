@@ -36,12 +36,12 @@ public class MemberService {
 
     @Transactional
     public void createMember(AddMemberRequest request) {
-        if (existsByLoginId(request.getId())) {
+        if (existsByLoginId(request.getLoginId())) {
             throw new RuntimeException("Member already exists");
         }
         String encodedPassword = passwordEncoder.encode(request.getPw());
         MemberEntity member = MemberEntity.builder()
-                .loginId(request.getId())
+                .loginId(request.getLoginId())
                 .password(encodedPassword)
                 .name(request.getName())
                 .email(request.getEmail())

@@ -18,7 +18,7 @@
                 <label for="password">비밀번호</label>
                 <input type="password" id="password" name="password"  required placeholder="비밀번호를 입력하세요">
             </div>
-            <button type="submit" class="btn login-btn">로그인</button>
+            <button type="button" class="btn login-btn">로그인</button>
             <button type="button" class="btn signup-btn" onclick="location.href='/sign-up'">회원가입</button>
 
             <div class="social-login">
@@ -30,4 +30,5 @@
 </section>
 <div th:replace="~{fragments/footer :: footer}"> </div>
 </body>
+<script defer src="/js/login.js"> </script>
 </html>

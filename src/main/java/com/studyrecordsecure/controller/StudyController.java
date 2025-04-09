@@ -2,9 +2,11 @@ package com.studyrecordsecure.controller;
 
 import com.studyrecordsecure.controller.request.AddStudyRequest;
 import com.studyrecordsecure.controller.request.UpdateStudyRequest;
+import com.studyrecordsecure.controller.response.AddStudyMemberNamesResponse;
 import com.studyrecordsecure.controller.response.StudyListViewResponse;
 import com.studyrecordsecure.controller.response.StudyRecordResponse;
 import com.studyrecordsecure.domain.StudyRecordEntity;
+import com.studyrecordsecure.service.MemberService;
 import com.studyrecordsecure.service.StudyRecordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -21,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudyController {
     private final StudyRecordService studyRecordService;
+    private final MemberService memberService;
 
     @GetMapping("/records")
     public String listStudyRecords(Model model) {
@@ -30,6 +34,16 @@ public class StudyController {
         }
         model.addAttribute("list", list);
         return "study/list";
+    }
+
+    @GetMapping({"", "/"})
+    public String study(Model model) {
+        List<AddStudyMemberNamesResponse> members = memberService.findAllMembers()
+                .stream()
+                .map(AddStudyMemberNamesResponse::new)
+                .toList();
+        model.addAttribute("members", members);
+        return "study/addForm";
     }
 
     @PostMapping({"", "/"})
@@ -50,8 +64,9 @@ public class StudyController {
     public String updateForm(@PathVariable Long id, Model model) {
         try {
             model.addAttribute("curdate", LocalDate.now());
+            model.addAttribute("runtime", LocalDateTime.now());
             StudyRecordEntity studyRecord = studyRecordService.findByStudyId(id);
-            model.addAttribute("list", new StudyRecordResponse(studyRecord));
+            model.addAttribute("members", new StudyRecordResponse(studyRecord));
             return "study/updateForm";
         }catch (Exception e) {
             e.printStackTrace();

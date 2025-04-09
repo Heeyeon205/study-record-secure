@@ -3,7 +3,6 @@ package com.studyrecordsecure.controller;
 import com.studyrecordsecure.controller.request.AddMemberRequest;
 import com.studyrecordsecure.controller.response.MemberListViewResponse;
 import com.studyrecordsecure.service.MemberService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +30,7 @@ public class MemberController {
     }
 
     @PostMapping({"", "/"})
-    public String join(@Valid @ModelAttribute AddMemberRequest request, Model model, BindingResult bindingResult) {
+    public String join(@ModelAttribute("member") AddMemberRequest request, Model model, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "member/joinForm";
         }
@@ -39,7 +38,7 @@ public class MemberController {
             memberService.createMember(request);
             return "redirect:/home";
         } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
+            model.addAttribute("msg", e.getMessage());
             return "member/joinForm";
         }
     }
