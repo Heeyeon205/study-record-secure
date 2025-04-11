@@ -72,3 +72,53 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
+//csrf 해제 후
+//@Bean
+//public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//    //     http.csrf(AbstractHttpConfigurer::disable); // 개발할때만
+//
+//    http
+//            .authorizeHttpRequests(auth -> auth
+//                    .requestMatchers("/home", "/test","/login" , "/" , "/sign-up","/member","/login-form","/auth").permitAll()
+//                    .requestMatchers("/member/**").hasAnyRole("STUDENT","ADMIN")
+//                    .requestMatchers("/admin").hasRole("ADMIN")
+//                    .requestMatchers("/error").permitAll()
+//                    .anyRequest().authenticated()
+//            );
+//
+//    http
+//            .formLogin(
+//                    form->{
+//                        form.loginPage("/login-form")
+//                                .loginProcessingUrl("/login")// 우리가 만든 로그인페이지로 자동 인터셉트됨
+//                                .failureHandler( customAuthFailureHandler)
+//                                .defaultSuccessUrl("/test", true);
+//
+//                    }
+//            ).oauth2Login(
+//                    oauth2 -> oauth2
+//                            .loginPage("/login-form")
+//                            .successHandler(customSuccessHandler)
+//                            .failureHandler(customAuthFailureHandler)
+//                            .permitAll()
+//
+//            );
+//
+//    // csrf 해제할때 적용
+//    http
+//            .logout((auth) -> auth.logoutUrl("/logout")
+//                    .logoutSuccessUrl("/"));
+//
+//    http
+//            .sessionManagement((auth) -> auth
+//                    .maximumSessions(1)
+//                    .maxSessionsPreventsLogin(true));
+//
+//    http
+//            .sessionManagement((auth) -> auth
+//                    .sessionFixation().changeSessionId());
+//
+//
+//    return http.build();
+//}
