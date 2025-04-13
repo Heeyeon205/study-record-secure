@@ -64,13 +64,4 @@ public class HomeController {
         }
         return customUserDetails;
     }
-
-    @GetMapping("/logout") // 수동 로그아웃 기능, @GetMapping 으로 csrf 활성화 시 사용 불가
-    public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/";
-    }
 }

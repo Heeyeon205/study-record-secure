@@ -2,7 +2,10 @@
 
 <header th:fragment="bodyHeader">
     <th:block sec:authorize="isAuthenticated()">
-        <div class="menu" onclick="location.href='/logout'"> 로그아웃</div>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <button type="submit">로그아웃</button>
+        </form>
         <div class="menu" onclick="location.href='/member/members'"> 회원목록</div>
         <div class="menu" onclick="location.href='/study'"> 공부 기록 등록</div>
         <div class="menu" onclick="location.href='/study/records'"> 공부 기록 목록 </div>

@@ -49,6 +49,13 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         );
 
+        http.logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/") // 로그아웃 후 이동할 경로
+                .invalidateHttpSession(true) // 세션 무효화
+                .deleteCookies("JSESSIONID") // 쿠키 삭제
+        );
+
         // 폼 로그인, OAuth2 소셜 로그인 구성 매서드
         http.formLogin(form -> form
                 .loginPage("/login")
