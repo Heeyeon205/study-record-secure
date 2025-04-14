@@ -12,6 +12,7 @@
 <section>
     <div class="error" th:if="${not #strings.isEmpty(msg)}" ><strong th:text="${msg}"></strong> </div>
     <form th:action="@{/member}" th:object="${member}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <table class="sm_table">
             <thead>
             <th colspan="2" class="center">회원 추가</th>

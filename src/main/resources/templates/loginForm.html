@@ -8,6 +8,7 @@
 <section>
     <div class="login-container">
         <form action="/login" method="POST">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <div class="form-group">
                 <label for="username">아이디</label>
                 <input type="text" id="username" name="username" required placeholder="아이디를 입력하세요">
